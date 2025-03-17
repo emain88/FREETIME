@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeFlow | Fokus-Management</title>
+    <style>
+        :root {
+            --background: #000000;
+            --blue-accent: #4285F4;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: white;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 640px;
+            padding: 40px;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 48px;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            background-color: var(--blue-accent);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-400);
+            margin-bottom: 40px;
+            max-width: 540px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .time-section {
+            margin-bottom: 48px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .current-time {
+            font-size: 4.5rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .date {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+        
+        .focus-section {
+            margin-top: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 16px;
+            letter-spacing: 0.2px;
+        }
+        
+        .section-description {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .input-group {
+            margin-bottom: 24px;
+        }
+        
+        .task-input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 300;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.03);
+            color: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .task-input:focus {
+            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .task-input::placeholder {
+            color: var(--gray-600);
+            font-weight: 300;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 28px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .timer-display {
+            font-size: 5.5rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            text-align: center;
+            margin: 40px 0;
+            visibility: hidden;
+            color: white;
+        }
+        
+        .active-task {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+            visibility: hidden;
+            text-align: center;
+        }
+        
+        .current-task-label {
+            font-weight: 500;
+            color: white;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            visibility: hidden;
+            margin-top: 24px;
+        }
+        
+        .footer {
+            margin-top: 64px;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-align: center;
+        }
+        
+        .progress-container {
+            height: 2px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 1px;
+            margin-top: 40px;
+            overflow: hidden;
+            visibility: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            transform-origin: left;
+            transition: transform 0.1s linear;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .current-time {
+                font-size: 3rem;
+            }
+            
+            .timer-display {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            TimeFlow
+        </div>
+        
+        <h1>Fokussiere deine Zeit.</h1>
+        <div class="subtitle">Steigere deine Produktivität mit zeitlich begrenzten Fokusblöcken. Jeder 20-Minuten-Block verbessert deine Konzentration.</div>
+        
+        <div class="time-section">
+            <div class="current-time" id="time">00:00:00</div>
+            <div class="date" id="date">Montag, 17. März 2025</div>
+        </div>
+        
+        <div class="focus-section">
+            <div class="section-title">20-Minuten Fokusblock</div>
+            <div class="section-description">Gib eine Aufgabe ein und starte einen fokussierten 20-Minuten-Block. Bleibe für die gesamte Dauer bei dieser einen Aufgabe.</div>
+            
+            <div class="input-group">
+                <input type="text" class="task-input" id="task-input" placeholder="Woran möchtest du arbeiten?">
+            </div>
+            
+            <button class="btn" id="start-btn">Fokusblock starten</button>
+            
+            <div class="active-task" id="active-task">
+                Du arbeitest an: <span class="current-task-label" id="current-task"></span>
+            </div>
+            
+            <div class="timer-display" id="timer">20:00</div>
+            
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-outline" id="pause-btn">Pause</button>
+                <button class="btn btn-outline" id="reset-btn">Abbrechen</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2025 TimeFlow Technologies — Alle Rechte vorbehalten
+        </div>
+    </div>
+    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Zeit formatieren
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            // Datum formatieren
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('de-DE', options);
+            
+            // Uhr aktualisieren
+            document.getElementById('time').innerHTML = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('date').innerHTML = dateString;
+            
+            // Jede Sekunde aktualisieren
+            setTimeout(updateClock, 1000);
+        }
+        
+        // 20-Minuten Timer Funktionalität
+        const TIMER_DURATION = 20 * 60; // 20 Minuten in Sekunden
+        let timer;
+        let timeLeft = TIMER_DURATION;
+        let isRunning = false;
+        
+        const taskInput = document.getElementById('task-input');
+        const startBtn = document.getElementById('start-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const timerDisplay = document.getElementById('timer');
+        const activeTask = document.getElementById('active-task');
+        const currentTask = document.getElementById('current-task');
+        const controls = document.querySelector('.controls');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            // Update progress bar
+            const progressPercentage = (TIMER_DURATION - timeLeft) / TIMER_DURATION * 100;
+            progressBar.style.transform = `scaleX(${progressPercentage / 100})`;
+        }
+        
+        function startTimer() {
+            if (!isRunning && taskInput.value.trim() !== '') {
+                isRunning = true;
+                currentTask.textContent = taskInput.value;
+                activeTask.style.visibility = 'visible';
+                timerDisplay.style.visibility = 'visible';
+                controls.style.visibility = 'visible';
+                progressContainer.style.visibility = 'visible';
+                startBtn.disabled = true;
+                startBtn.style.opacity = '0.5';
+                
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        isRunning = false;
+                        
+                        // Benachrichtigung, wenn möglich
+                        if ('Notification' in window && Notification.permission === 'granted') {
+                            new Notification('TimeFlow', {
+                                body: `20 Minuten Fokuszeit für "${taskInput.value}" abgeschlossen!`
+                            });
+                        }
+                        
+                        setTimeout(() => {
+                            resetTimer();
+                        }, 3000);
+                    }
+                }, 1000);
+            }
+        }
+        
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+                pauseBtn.textContent = 'Fortsetzen';
+            } else {
+                startTimer();
+                pauseBtn.textContent = 'Pause';
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            timeLeft = TIMER_DURATION;
+            updateTimerDisplay();
+            pauseBtn.textContent = 'Pause';
+            taskInput.value = '';
+            activeTask.style.visibility = 'hidden';
+            timerDisplay.style.visibility = 'hidden';
+            controls.style.visibility = 'hidden';
+            progressContainer.style.visibility = 'hidden';
+            startBtn.disabled = false;
+            startBtn.style.opacity = '1';
+        }
+        
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        
+        // Benachrichtigungen anfordern
+        if ('Notification' in window) {
+            Notification.requestPermission();
+        }
+        
+        // Initialisieren
+        updateClock();
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
