@@ -45,11 +45,30 @@
             padding: 40px;
         }
         
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .eugen-banner {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, var(--blue-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
         .logo {
             font-size: 1.3rem;
             font-weight: 400;
             color: white;
-            margin-bottom: 48px;
             letter-spacing: 0.2px;
             display: flex;
             align-items: center;
@@ -57,66 +76,54 @@
         }
         
         .logo-icon {
-            background-color: var(--blue-accent);
+            background-color: white;
             width: 22px;
             height: 22px;
             border-radius: 50%;
         }
         
-        h1 {
-            font-size: 3.2rem;
-            font-weight: 500;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-            color: white;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--gray-400);
-            margin-bottom: 40px;
-            max-width: 540px;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-        
         .time-section {
-            margin-bottom: 48px;
+            margin-bottom: 32px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .current-time {
-            font-size: 4.5rem;
+            font-size: 2.5rem;
             font-weight: 500;
             letter-spacing: -0.5px;
-            margin-bottom: 8px;
             color: white;
         }
         
         .date {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--gray-500);
             font-weight: 300;
             letter-spacing: 0.2px;
         }
         
         .focus-section {
-            margin-top: 32px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
             padding: 32px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            margin-bottom: 24px;
+        }
+        
+        .focus-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
         
         .section-title {
-            font-size: 1.05rem;
-            font-weight: 400;
+            font-size: 1.4rem;
+            font-weight: 500;
             color: white;
-            margin-bottom: 16px;
             letter-spacing: 0.2px;
         }
         
@@ -128,25 +135,22 @@
             line-height: 1.6;
         }
         
-        .input-group {
-            margin-bottom: 24px;
-        }
-        
         .task-input {
             width: 100%;
-            padding: 16px;
-            font-size: 1rem;
+            padding: 18px;
+            font-size: 1.1rem;
             font-weight: 300;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border-radius: 14px;
             background-color: rgba(255, 255, 255, 0.03);
             color: white;
             outline: none;
             transition: all 0.2s;
+            margin-bottom: 24px;
         }
         
         .task-input:focus {
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: white;
             background-color: rgba(255, 255, 255, 0.05);
         }
         
@@ -163,11 +167,12 @@
             color: black;
             border: none;
             border-radius: 40px;
-            padding: 14px 28px;
-            font-size: 0.9rem;
-            font-weight: 400;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            width: 100%;
         }
         
         .btn:hover {
@@ -188,52 +193,37 @@
             background-color: rgba(255, 255, 255, 0.05);
         }
         
-        .timer-display {
-            font-size: 5.5rem;
-            font-weight: 400;
-            letter-spacing: -0.5px;
+        .active-session {
+            padding: 32px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(100, 100, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            margin: 40px 0;
             visibility: hidden;
-            color: white;
         }
         
         .active-task {
-            font-size: 1.125rem;
-            color: var(--gray-400);
-            margin-bottom: 16px;
-            visibility: hidden;
-            text-align: center;
-        }
-        
-        .current-task-label {
-            font-weight: 500;
+            font-size: 1.25rem;
             color: white;
+            margin-bottom: 16px;
+            font-weight: 400;
         }
         
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            visibility: hidden;
-            margin-top: 24px;
-        }
-        
-        .footer {
-            margin-top: 64px;
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            text-align: center;
+        .timer-display {
+            font-size: 6rem;
+            font-weight: 500;
+            letter-spacing: -1px;
+            color: white;
+            margin: 24px 0;
         }
         
         .progress-container {
-            height: 2px;
+            height: 4px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 1px;
-            margin-top: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 24px 0;
             overflow: hidden;
-            visibility: hidden;
         }
         
         .progress-bar {
@@ -242,7 +232,28 @@
             background-color: white;
             transform-origin: left;
             transition: transform 0.1s linear;
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .control-btn {
+            padding: 14px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            min-width: 120px;
+        }
+        
+        .footer {
+            margin-top: 32px;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-align: center;
         }
         
         @media (max-width: 640px) {
@@ -250,63 +261,63 @@
                 padding: 24px;
             }
             
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .current-time {
-                font-size: 3rem;
-            }
-            
             .timer-display {
                 font-size: 4rem;
+            }
+            
+            .controls {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <div class="logo-icon"></div>
-            TimeFlow
-        </div>
+        <div class="eugen-banner">EUGEN THE BEST</div>
         
-        <h1>Fokussiere deine Zeit.</h1>
-        <div class="subtitle">Steigere deine Produktivität mit zeitlich begrenzten Fokusblöcken. Jeder 20-Minuten-Block verbessert deine Konzentration.</div>
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                TimeFlow
+            </div>
+        </div>
         
         <div class="time-section">
-            <div class="current-time" id="time">00:00:00</div>
-            <div class="date" id="date">Montag, 17. März 2025</div>
+            <div>
+                <div class="current-time" id="time">00:00:00</div>
+                <div class="date" id="date">Montag, 17. März 2025</div>
+            </div>
         </div>
         
-        <div class="focus-section">
-            <div class="section-title">20-Minuten Fokusblock</div>
-            <div class="section-description">Gib eine Aufgabe ein und starte einen fokussierten 20-Minuten-Block. Bleibe für die gesamte Dauer bei dieser einen Aufgabe.</div>
-            
-            <div class="input-group">
-                <input type="text" class="task-input" id="task-input" placeholder="Woran möchtest du arbeiten?">
+        <div class="focus-section" id="setup-section">
+            <div class="focus-header">
+                <div class="section-title">Fokussierte Aktivität</div>
             </div>
             
-            <button class="btn" id="start-btn">Fokusblock starten</button>
+            <div class="section-description">Gib eine Aufgabe ein und starte einen fokussierten 20-Minuten-Block ohne Ablenkungen.</div>
             
-            <div class="active-task" id="active-task">
-                Du arbeitest an: <span class="current-task-label" id="current-task"></span>
-            </div>
+            <input type="text" class="task-input" id="task-input" placeholder="Woran möchtest du arbeiten?">
+            
+            <button class="btn" id="start-btn">Fokus-Session starten</button>
+        </div>
+        
+        <div class="active-session" id="active-session">
+            <div class="active-task" id="active-task">Du arbeitest an: <span id="current-task"></span></div>
             
             <div class="timer-display" id="timer">20:00</div>
             
-            <div class="progress-container" id="progress-container">
+            <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
             
             <div class="controls">
-                <button class="btn btn-outline" id="pause-btn">Pause</button>
-                <button class="btn btn-outline" id="reset-btn">Abbrechen</button>
+                <button class="btn btn-outline control-btn" id="pause-btn">Pause</button>
+                <button class="btn btn-outline control-btn" id="reset-btn">Abbrechen</button>
             </div>
         </div>
         
         <div class="footer">
-            © 2025 TimeFlow Technologies — Alle Rechte vorbehalten
+            © 2025 TimeFlow — Entwickelt von Eugen
         </div>
     </div>
     
@@ -342,10 +353,9 @@
         const pauseBtn = document.getElementById('pause-btn');
         const resetBtn = document.getElementById('reset-btn');
         const timerDisplay = document.getElementById('timer');
-        const activeTask = document.getElementById('active-task');
+        const setupSection = document.getElementById('setup-section');
+        const activeSession = document.getElementById('active-session');
         const currentTask = document.getElementById('current-task');
-        const controls = document.querySelector('.controls');
-        const progressContainer = document.getElementById('progress-container');
         const progressBar = document.getElementById('progress-bar');
         
         function updateTimerDisplay() {
@@ -362,12 +372,8 @@
             if (!isRunning && taskInput.value.trim() !== '') {
                 isRunning = true;
                 currentTask.textContent = taskInput.value;
-                activeTask.style.visibility = 'visible';
-                timerDisplay.style.visibility = 'visible';
-                controls.style.visibility = 'visible';
-                progressContainer.style.visibility = 'visible';
-                startBtn.disabled = true;
-                startBtn.style.opacity = '0.5';
+                setupSection.style.display = 'none';
+                activeSession.style.visibility = 'visible';
                 
                 timer = setInterval(() => {
                     timeLeft--;
@@ -410,12 +416,8 @@
             updateTimerDisplay();
             pauseBtn.textContent = 'Pause';
             taskInput.value = '';
-            activeTask.style.visibility = 'hidden';
-            timerDisplay.style.visibility = 'hidden';
-            controls.style.visibility = 'hidden';
-            progressContainer.style.visibility = 'hidden';
-            startBtn.disabled = false;
-            startBtn.style.opacity = '1';
+            setupSection.style.display = 'block';
+            activeSession.style.visibility = 'hidden';
         }
         
         startBtn.addEventListener('click', startTimer);
